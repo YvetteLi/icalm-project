@@ -144,6 +144,17 @@ In this step, node **F** is selected using cosine similarity after exploring all
    3. **Interest-Based Pathway**:
       - **Main Feature**: Uses student input to recommend flashcards, prioritizing topics of interest using cosine similarity to match content with user preferences.
       - **Correlation**: This pathway embodies **Interactive learning**, allowing students to actively shape their learning process, similar to how ICALM facilitates learning based on students' evolving interests.
+      - In the Interest-Based Pathway of ICALM, students input areas of interest, and the system matches relevant nodes using cosine similarity. This pathway encourages **interactive learning** through personalized, dynamic exploration ([Chi et al., 2012](https://doi.org/10.3102/0034654312449406)).
+
+```
+Student Input --> A (cosine similarity)
+Student Input --> B (cosine similarity)
+Student Input --> C (cosine similarity)
+A --> Visited D
+C --> Visited E
+```
+
+By embedding student input with a pre-trained language model and matching it to flashcards via cosine similarity, ICALM offers personalized learning paths.
 
 #### Additional Functions that Apply to Each Pathways
    1. **Review Mistakes (`review_mistakes.py`)**
