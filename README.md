@@ -134,5 +134,5 @@ By incorporating flashcards, knowledge graphs, and personalized pathways, ICALM 
 - Expansion to support a broader range of subjects.
 
 ## License
-This project is licensed under the CC0-1.0 license. See the (LICENSE)[LICENSE] file for details.
+This project is licensed under the CC0-1.0 license. See the [LICENSE](LICENSE) file for details.
 
