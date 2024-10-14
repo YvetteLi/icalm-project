@@ -4,7 +4,7 @@
 [Knowledge Graph based Recommendation System in EdTech](Knowledge_Graph_based_Recommendation_System.pdf)
 
 ## Poster
-[EdTech Project](EdTech Project.pdf)
+[EdTech Project.pdf](https://github.com/YvetteLi/icalm-project/blob/main/EdTech%20Project.pdf)
 
 ## Overview
 The **Interactive-Constructive-Active Learning Machine (ICALM)** is an advanced Intelligent Tutoring System (ITS) designed to address challenges in student engagement and cognitive development in the era of Large Language Models (LLMs) like ChatGPT. ICALM integrates three key components:
