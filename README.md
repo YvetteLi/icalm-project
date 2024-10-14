@@ -98,6 +98,48 @@ ICALM's foundation lies in educational psychology, cognitive development, and le
    2. **Metanode-Based Pathway**:
       - **Main Feature**: Prioritizes flashcards related to concepts with high entropy, highlighting complex or interconnected ideas.
       - **Correlation**: Aligns with **Constructive learning** in ICALM by helping students understand and form connections between abstract concepts, fostering deeper cognitive engagement.
+      - The following series of node and edge graphs illustrates the process of the MetaNode Pathway, where the system prioritizes nodes with the highest entropy, helping students build structured knowledge by exploring interconnected concepts ([Rossiello et al., 2022](https://arxiv.org/abs/2206.02315)).
+
+#### Step 1: Initial Step - High Entropy Node Selection
+
+The system starts by selecting the node (flashcard) with the highest entropy (the most interconnections).
+
+```
+  A --> B
+  A --> C
+  B --> D
+  C --> E
+```
+
+Here, node **A** is selected because it has the highest entropy (most interconnections).
+
+#### Step 2: Traversing to Neighboring Nodes
+
+Once the high-entropy node is selected, the system traverses its neighboring nodes based on their entropy values.
+
+```
+  A --> B (selected)
+  A --> C (selected)
+  B --> D
+  C --> E
+```
+
+Nodes **B** and **C** are visited after node **A** based on their entropy values.
+
+#### Step 3: Exhausting Neighbors and Selecting a New Node
+
+If the neighbors of the current node are exhausted, the system uses cosine similarity to find a new high-entropy node to explore.
+
+```
+  A --> B
+  A --> C
+  B --> D
+  C --> E
+  D --> F (new high-entropy node selected)
+```
+
+In this step, node **F** is selected using cosine similarity after exploring all neighboring nodes of the initial high-entropy node.
+
 
    3. **Interest-Based Pathway**:
       - **Main Feature**: Uses student input to recommend flashcards, prioritizing topics of interest using cosine similarity to match content with user preferences.
