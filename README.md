@@ -1,5 +1,8 @@
 # ICALM: Interactive-Constructive-Active Learning Machine
 
+## Proposal 
+[Knowledge Graph based Recommendation System in EdTech](Knowledge_Graph_based_Recommendation_System.pdf)
+
 ## Overview
 The **Interactive-Constructive-Active Learning Machine (ICALM)** is an advanced Intelligent Tutoring System (ITS) designed to address challenges in student engagement and cognitive development in the era of Large Language Models (LLMs) like ChatGPT. ICALM integrates three key components:
 1. **Concept Map Generation**: Converts flashcards into structured concept maps.
@@ -131,5 +134,5 @@ By incorporating flashcards, knowledge graphs, and personalized pathways, ICALM 
 - Expansion to support a broader range of subjects.
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the CC0-1.0 license. See the (LICENSE)[LICENSE] file for details.
 
