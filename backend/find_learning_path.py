@@ -4,6 +4,19 @@ from backend.functionality_util import run_query
 
 # TODO: Student may want to switch to a new node anytime, then we need to recalculate the order of visited nodes
 def get_node_with_highest_entropy():
+    """
+    Retrieves the node with the highest entropy from a graph database.
+
+    The function constructs and runs a Cypher query that calculates the entropy for each node based on its relationships.
+    The entropy is calculated using the formula:
+
+        -sum(p * log(p) / log(2))
+
+    where p is the proportion of each relationship type for that node.
+
+    Returns:
+        Node with the highest entropy if exists, otherwise None.
+    """
     query = """
     MATCH (n)-[r]->()
     WITH n, type(r) AS relType, count(r) AS relCount, COUNT { (n)--() } AS totalRels
@@ -19,6 +32,17 @@ def get_node_with_highest_entropy():
 
 
 def get_neighbors_with_entropy(node_id):
+    """
+
+    Fetches the neighboring nodes of a given node and calculates the entropy for each neighbor based on the relationship types and counts.
+
+    Args:
+        node_id (str): The ID of the node for which neighbors are to be fetched.
+
+    Returns:
+        list: A list of neighbors with their corresponding entropy values, ordered by entropy in descending order.
+
+    """
     query = f"""
         MATCH (n)-[r]->(neighbor)
         WHERE n.id = '{node_id}'
@@ -31,6 +55,18 @@ def get_neighbors_with_entropy(node_id):
 
 
 def find_closest_node_with_high_entropy(visited_nodes, k=1):
+    """
+    Finds the closest node based on cosine similarity that has not been visited yet.
+
+    Arguments:
+    visited_nodes -- List of nodes that have already been visited.
+    k -- Number of neighbors to consider (default is 1).
+
+    Returns:
+    The closest node with high entropy that has not been visited yet, or None if no such node is found.
+
+    Uses Neo4j Graph Data Science API to find the K-nearest neighbors based on cosine similarity.
+    """
     visited_nodes_str = "'" + "', '".join(map(str, visited_nodes)) + "'"
     # Use Neo4j Graph Data Science API to find the K-nearest neighbors
     cosine_query = f"""
@@ -51,6 +87,21 @@ def find_closest_node_with_high_entropy(visited_nodes, k=1):
     return None
 
 def query_one_node_with_id(flashcard_id):
+    """
+    Retrieves a single Flashcard node from the graph database based on the given flashcard_id.
+
+    This function constructs a Cypher query that matches Flashcard nodes excluding the one with the specified flashcard_id.
+    It then executes the query and returns the matched node.
+
+    Args:
+        flashcard_id (str): The identifier of the flashcard to exclude from the query.
+
+    Returns:
+        dict: The first matched Flashcard node, excluding the one with the specified id.
+
+    Logs:
+        Retrieves the node and logs the node id for debugging purposes.
+    """
     query = f"""
     MATCH (q:Flashcard)
     WHERE NOT q.id = '{flashcard_id}' 
@@ -61,8 +112,29 @@ def query_one_node_with_id(flashcard_id):
     return node
 
 def walk_with_entropy(k=3, visited_nodes=set(), starting_node_id='', logging=logging):
-    # Step 1: Find the node with the highest entropy
+    """
+    Conducts a walk-based exploration of nodes starting from a node with the highest entropy value or a specific starting node.
 
+    Arguments:
+    k: int (default: 3)
+        Number of nearest neighbors to consider when the neighborhood is exhausted.
+    visited_nodes: set
+        A set containing the IDs of the visited nodes.
+    starting_node_id: str
+        The ID of the starting node. If not provided, the function will select the node with the highest entropy.
+    logging: logging
+        Logger for information and error messages.
+
+    Returns:
+    set
+        The set of visited node IDs.
+
+    Steps:
+    1. Identify the starting node either through highest entropy or a specific node ID.
+    2. Traverse the neighbors based on their entropy values.
+    3. Continue the traversal until there are no more nodes with high entropy to visit.
+    """
+    # Step 1: Find the node with the highest entropy
     if not starting_node_id:
         logging.info("Start from getting the node with highest entropy")
         node = get_node_with_highest_entropy()

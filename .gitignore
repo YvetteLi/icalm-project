@@ -26,7 +26,7 @@ app/*.ipynb
 # Virtual environments
 venv/
 env/
-
+assets/flashcards_tmp
 # Database files
 *.sqlite3
 

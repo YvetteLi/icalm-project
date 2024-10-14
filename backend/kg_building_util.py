@@ -1,3 +1,7 @@
+"""
+This file is adopted and modified from
+https://github.com/tomasonjo/blogs/blob/master/llm/openaifunction_constructing_graph.ipynb?ref=blog.langchain.dev
+"""
 from langchain.chains.openai_functions import (
     create_openai_fn_chain,
     create_structured_output_chain,
@@ -42,6 +46,23 @@ class KnowledgeGraph(BaseModel):
 
 
 def format_property_key(s: str) -> str:
+    """
+        Formats a string into camelCase.
+
+        Takes a string `s` consisting of multiple words and converts it
+        into camelCase format. The first word is in lowercase, and each
+        subsequent word starts with an uppercase letter and the rest in
+        lowercase.
+
+        Args:
+            s (str): The input string to be formatted.
+
+        Returns:
+            str: The camelCase formatted string.
+
+        Example:
+            'hello world example' -> 'helloWorldExample'
+    """
     words = s.split()
     if not words:
         return s

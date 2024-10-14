@@ -14,6 +14,17 @@ automatically
 
 @st.cache_resource
 def get_student_interest(student_input, visited_nodes, batch_size=10):
+    """
+    Caches the resource to retrieve student interest flashcards based on input and visited nodes.
+
+    Args:
+        student_input (str): The current input from the student.
+        visited_nodes (list): A list of flashcard IDs already visited by the student.
+        batch_size (int, optional): The number of flashcards to retrieve. Defaults to 10.
+
+    Returns:
+        list: A list of flashcards (each represented by a dictionary) containing 'question', 'answer', and 'id' keys.
+    """
     student_input_embedded = embedding_model.embed_query(student_input)
     visited_nodes_str = "'" + "', '".join(map(str, visited_nodes)) + "'"
     # Use Neo4j Graph Data Science API to find the K-nearest neighbors
@@ -33,6 +44,12 @@ def get_student_interest(student_input, visited_nodes, batch_size=10):
     return flashcards
 
 def get_all_metanodes():
+    """
+    Fetches all distinct metanode names from the database, stripping the "metanode" suffix.
+
+    Returns:
+        list: A list of metanode names with the "metanode" suffix removed.
+    """
     query = """
         MATCH (m:Metanode)
         RETURN DISTINCT m.name AS metanode_name
@@ -48,6 +65,9 @@ def get_all_metanodes():
 @st.fragment
 def start_from_student_interest(st, llm, batch_size=10, lookback_size=10):
     """
+    start_from_student_interest
+
+    Initializes the learning session based on the student's interest and interaction with flashcards.
     1. **Graph Structure**:
        - We assume that MetaNodes (e.g., broad categories like "Economics", "Biology") are connected to flashcards in a graph. Each flashcard belongs to a MetaNode.
        - MetaNodes will have relationships to flashcards, and flashcards can be compared for similarity using cosine similarity in Neo4j.
@@ -56,6 +76,15 @@ def start_from_student_interest(st, llm, batch_size=10, lookback_size=10):
        - Step 2: Once selected, show flashcards related to that MetaNode.
        - Step 3: If all flashcards in a MetaNode are explored, show the remaining MetaNodes.
        - Step 4: If all MetaNodes are explored but flashcards remain, use cosine similarity to recommend the most relevant flashcard.
+
+    st: Streamlit object
+        The Streamlit object for handling UI components and session states.
+    llm: Language model object
+        The language model used for generating hints and processing student answers.
+    batch_size: int, optional
+        The number of flashcards to fetch in one batch (default is 10).
+    lookback_size: int, optional
+        The number of previously explored questions to consider for avoiding repetition (default is 10).
     """
     # Initialize session state variables
     # Fetch flashcards that have not been explored yet

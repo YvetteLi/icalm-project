@@ -15,6 +15,54 @@ FLASHCARD_PATH = 'assets/flashcards'
 
 
 class LineTextSplitter(TextSplitter):
+    """
+         class LineTextSplitter(TextSplitter):
+
+         A class that inherits from TextSplitter and provides functionality
+         to split text based on lines, respecting the provided chunk size and overlap.
+
+         Attributes:
+         chunk_size (int): The maximum number of lines per chunk.
+         chunk_overlap (int): The number of overlapping lines between consecutive chunks.
+
+         Methods:
+         __init__(chunk_size, chunk_overlap=0):
+             Initializes the LineTextSplitter with the given chunk size and overlap.
+
+         split_text(text):
+             Splits the given text into chunks based on lines.
+
+         split_documents(documents):
+             Splits the page content of each document in the given list into chunks.
+
+         def __init__(self, chunk_size: int, chunk_overlap: int = 0):
+
+         Initializes the LineTextSplitter with the specified chunk size and overlap.
+
+         Parameters:
+         chunk_size (int): The maximum number of lines per chunk.
+         chunk_overlap (int): The number of overlapping lines between consecutive chunks. Default is 0.
+
+         def split_text(self, text: str):
+
+         Splits the provided text into chunks based on lines, respecting the chunk size and overlap.
+
+         Parameters:
+         text (str): The text to be split into chunks.
+
+         Returns:
+         list: A list of text chunks.
+
+         def split_documents(self, documents):
+
+         Splits the page content of each document in the provided list into chunks.
+
+         Parameters:
+         documents (list): A list of Document objects to be split.
+
+         Returns:
+         list: A list of Document objects, each containing a chunk of text.
+    """
     def __init__(self, chunk_size: int, chunk_overlap: int = 0):
         super().__init__(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
         self.chunk_size = chunk_size
@@ -43,6 +91,17 @@ class LineTextSplitter(TextSplitter):
         return split_docs
 
 def results_check(selection=''):
+    """
+        results_check(selection='')
+
+        This function executes a query to count the total number of flashcards in the database.
+        It then updates the UI with the total number of flashcards found and sets the 'total_cards'
+        value in the session state. If an error occurs during the execution of the query,
+        an error message is displayed and the execution is stopped.
+
+        Parameters:
+        selection (str): An optional string to tailor the query or display messages.
+    """
     query = """
         MATCH (f:Flashcard)
         RETURN COUNT(f) AS total_flashcards
@@ -59,6 +118,33 @@ def results_check(selection=''):
 
 
 def upload_flashcards():
+    """
+    Allows the user to upload flashcards in text format, load from the database, or enter custom content to build a knowledge graph.
+
+    upload_flashcards() handles three main options for the user:
+
+    1. Uploading a flashcard file manually which will be processed and split into smaller chunks to build a knowledge graph.
+    2. Loading flashcards from a pre-existing database if no file is uploaded.
+    3. Entering custom content directly to build a knowledge graph.
+
+    In case a file is uploaded:
+    - The uploaded file is read and processed to extract content.
+    - The content is split into smaller chunks using LineTextSplitter.
+    - Each chunk is passed to the extract_and_store_graph function to build the knowledge dataset.
+
+    If the user chooses to load from the database:
+    - The content is retrieved from the specified path and split into smaller chunks.
+    - Each chunk is then passed to the extract_and_store_graph function using the selected topic.
+
+    If the user prefers to proceed without uploading or loading:
+    - The function checks the results stored in the database.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     st.markdown("### Option 1: Upload your flashcards in text format.")
 
     # File uploader for manual upload

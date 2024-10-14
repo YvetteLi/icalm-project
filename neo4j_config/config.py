@@ -8,7 +8,7 @@ load_dotenv()
 # Neo4j connection configuration
 url = os.getenv('NEO4J_URL') # neo4j+s://2794d51e.databases.neo4j.io
 username = os.getenv('NEO4J_USERNAME')
-password = os.getenv('NEO4J_PASSWORD') # K0_cDvQ5_tPjK0l1zlj3xAcY8LNr4pwbNh1nx2EZrwI
+password = os.getenv('NEO4J_PASSWORD')
 
 
 # Setup Neo4j connection

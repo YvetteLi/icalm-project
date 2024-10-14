@@ -8,17 +8,29 @@ import logging
 from pyvis.network import Network
 import networkx as nx
 # Function to run Cypher queries
-# def run_query(query):
-#     with graph.session() as session:
-#         result = session.run(query)
-#         return [record for record in result]
-
 def run_query(query):
     result = graph.query(query)
     return result
 
 # Interactive Graph Visualization using Pyvis
 def interactive_graph(st, display_batch=50):
+    """
+    interactive_graph(st, display_batch=50)
+
+    Displays an interactive graph visualization using Streamlit and Pyvis.
+
+    Parameters:
+    st: Streamlit module for displaying web elements.
+    display_batch: Optional; Number of node relationships to fetch for graph display. Defaults to 50.
+
+    This function:
+    1. Initializes a NetworkX graph.
+    2. Executes a query to fetch a number of nodes and their relationships from the graph database.
+    3. Adds the fetched nodes and edges to the graph.
+    4. Executes another query to fetch and add standalone nodes not connected to other nodes within the given limit.
+    5. Initializes a Pyvis Network object with the NetworkX graph.
+    6. Renders the graph for interactive visualization within a Streamlit web app.
+    """
     st.header("Explore the Graph Visually")
 
     # Create a NetworkX graph
@@ -63,6 +75,12 @@ def interactive_graph(st, display_batch=50):
 
 # Display Flashcard with Hint
 def generate_hint_llm(llm, flashcard):
+    """
+    Generate a hint or explanation for a flashcard using a Language Learning Model (LLM).
+
+    llm: The language learning model to be used for generating the hint. It should have a 'predict' method that takes a textual prompt as input.
+    flashcard: A dictionary containing the flashcard information. It should have 'question', 'answer', and 'id' keys.
+    """
     # Check if related_id and relationship_type are present
     prompt = f"""
     You are a helpful assistant. The user has asked for a hint about the following flashcard, but there is no explicit relationship found.
