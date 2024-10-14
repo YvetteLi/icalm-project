@@ -1,0 +1,33 @@
+# Ignore environment configuration file
+.env
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore log files
+*.log
+
+# Notebook files
+*.ipynb
+
+# Temporary files
+*.html
+
+# Test files in app directory
+app/test.py
+app/*.ipynb
+
+# Ignore Python compiled files
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+
+# Database files
+*.sqlite3
+
+# Ignore macOS system files
+.DS_Store

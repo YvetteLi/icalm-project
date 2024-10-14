@@ -1,0 +1,46 @@
+[econ]
+example="""
+Economics is best defined as,making choices with unlimited wants but facing a scarcity of resources
+"When an economy produces more houses and fewer typewriters, this deals with the question of",what
+Marginal benefit from a good is the,benefit from consuming one more unit of a good.
+"In marginal benefit, when you consume one more unit of a good, the benefit _________ as consumption ___________.",benefit decreasesconsumption increases
+Which event causes a movement along but not a shift of the supply curve for spinach?,A rise in the price of spinach.
+Our inability to satisfy all our wants is called,scarcity
+"""
+results = """
+# Flashcards (Nodes)
+[[nodes]] id = "Scarcity and Choice in Economics" label = "Flashcard" question = "Economics is best defined as" answer = "making choices with unlimited wants but facing a scarcity of resources." topic = "Scarcity and Choice in Economics"
+[[nodes]] id = "Scarcity" label = "Flashcard" question = "Our inability to satisfy all our wants is called" answer = "scarcity" topic = "Scarcity"
+[[nodes]] id = "Economics and Scarcity" label = "Flashcard" question = "The social science that studies the choices... dealing with scarcity and incentives." answer = "Economics involves making choices with scarcity and incentives." topic = "Economics and Scarcity"
+[[nodes]] id = "Incentives" label = "Flashcard" question = "Incentives encourage or discourage actions." answer = "A reward encourages an action or a penalty discourages an action." topic = "Incentives"
+[[nodes]] id = "Production Decisions" label = "Flashcard" question = "When an economy produces more houses and fewer typewriters, this deals with the question of" answer = "what" topic = "Production Decisions"
+[[nodes]] id = "Price Elasticity of Demand" label = "Flashcard" question = "The price elasticity of demand equals magnitude of the percentage change in the _______ divided by the percentage change in the ______." answer = "percentage change in the quantity demanded divided by the percentage change in the price." topic = "Price Elasticity of Demand"
+[[nodes]] id = "Marginal Benefit and Consumption" label = "Flashcard" question = "Marginal benefit from a good is the" answer = "benefit from consuming one more unit of a good." topic = "Marginal Benefit"
+[[nodes]] id = "Supply Curve Movement" label = "Flashcard" question = "Which event causes a movement along but not a shift of the supply curve for spinach?" answer = "A rise in the price of spinach." topic = "Supply Curve Movement"
+[[nodes]] id = "Marginal Benefit Change" label = "Flashcard" question = "In marginal benefit, when you consume one more unit of a good, the benefit _________ as consumption ___________." answer = "benefit decreasesconsumption increases" topic = "Marginal Benefit"
+
+# MetaNodes (Abstract Topics)
+[[nodes]] id = "Scarcity MetaNode" label = "MetaNode" description = "This MetaNode represents the topic of Scarcity and includes flashcards related to scarcity, economics, and production." topic = "Scarcity"
+[[nodes]] id = "Incentives MetaNode" label = "MetaNode" description = "This MetaNode represents the abstraction of Incentives, covering reward, penalty, and decision-making related to economic choices." topic = "Incentives"
+[[nodes]] id = "Production MetaNode" label = "MetaNode" description = "This MetaNode represents production decisions, including what to produce and economic trade-offs." topic = "Production"
+[[nodes]] id = "Supply and Demand MetaNode" label = "MetaNode" description = "This MetaNode includes concepts related to supply and demand, covering elasticity and supply curve shifts." topic = "Supply and Demand"
+
+# MetaNode Definitions (Relationships)
+[[relationships]] source = "Scarcity MetaNode" target = "Scarcity" type = "Defines" description = "The MetaNode defines the flashcard topic related to scarcity."
+[[relationships]] source = "Scarcity MetaNode" target = "Economics and Scarcity" type = "Defines" description = "The MetaNode defines the flashcard topic related to economics and scarcity."
+[[relationships]] source = "Scarcity MetaNode" target = "Scarcity and Choice in Economics" type = "Defines" description = "The MetaNode defines the flashcard related to choices in economics."
+[[relationships]] source = "Incentives MetaNode" target = "Incentives" type = "Defines" description = "The MetaNode defines the concept of incentives, including rewards and penalties."
+[[relationships]] source = "Production MetaNode" target = "Production Decisions" type = "Defines" description = "The MetaNode defines the flashcard related to production decisions."
+[[relationships]] source = "Production MetaNode" target = "Marginal Benefit and Consumption" type = "Defines" description = "The MetaNode defines the topic of marginal benefit and consumption."
+[[relationships]] source = "Supply and Demand MetaNode" target = "Supply Curve Movement" type = "Defines" description = "The MetaNode defines the topic related to movement along the supply curve."
+[[relationships]] source = "Supply and Demand MetaNode" target = "Price Elasticity of Demand" type = "Defines" description = "The MetaNode defines the topic related to price elasticity of demand."
+
+# Flashcards to Flashcards (Relationships)
+[[relationships]] source = "Scarcity and Choice in Economics" target = "Economics and Scarcity" type = "Causal" description = "Scarcity causes the need for choices in economics."
+[[relationships]] source = "Scarcity and Choice in Economics" target = "Economics and Scarcity" type = "Associative" description = "Both flashcards define economics in relation to scarcity and incentives."
+[[relationships]] source = "Scarcity and Choice in Economics" target = "Incentives" type = "Causal" description = "Scarcity causes individuals to make choices, and incentives guide those choices."
+[[relationships]] source = "Production Decisions" target = "Price Elasticity of Demand" type = "Associative" description = "Both flashcards deal with decision-making in economics."
+[[relationships]] source = "Marginal Benefit and Consumption" target = "Consumption" type = "Causal" description = "As consumption increases, marginal benefit decreases."
+[[relationships]] source = "Supply Curve Movement" target = "Supply Curve Shift" type = "Comparative" description = "Supply curve movement covers price-induced shifts, while supply curve shift describes external factor-induced shifts."
+[[relationships]] source = "Economics and Scarcity" target = "Goods and Services" type = "Hierarchical" description = "Goods and services are the outputs of production that are allocated based on the scarcity of resources."
+"""
